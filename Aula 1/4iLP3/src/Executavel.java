@@ -5,7 +5,7 @@ import javax.persistence.Persistence;
 public class Executavel {
 
 	public static void main(String[] args) {
-		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("4iLP3");
+		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Aula1_4I");
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		
 		Pessoa lucas = new Pessoa("Lucas Kauer");
