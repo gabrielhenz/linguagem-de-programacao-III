@@ -66,7 +66,7 @@ Feito isto:
 </persistence>
 ``` 
 
-## Classe Pessoa:
+## Classe Pessoa
 
 ```java
 import javax.persistence.*;
@@ -104,7 +104,7 @@ public class Pessoa {
 ```
 
 
-## Classe Executavel:
+## Classe Executavel
 
 ```java
 import javax.persistence.EntityManager;
@@ -128,4 +128,18 @@ public class Executavel {
     }
     
 }
+```
+
+
+## Banco de Dados
+
+Criar o banco de dados antes de rodar a classe `Executavel`.
+O nome do BD deve ser igual ao informado na tag 
+```xml 
+<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/4i"/>
+```
+onde o nome do BD deve ser passado como ultimo parametro, depois da porta em `value="jdbc:mysql://localhost:3306/4i"`.
+
+```sql
+CREATE DATABASE 4i;
 ```
