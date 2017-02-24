@@ -48,7 +48,7 @@ Feito isto:
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
-    <persistence-unit name="aula1-4i" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="Aula1_4I" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>   
         <class>Pessoa</class>
         <properties>
@@ -115,14 +115,19 @@ public class Executavel {
 	
     public static void main(String[] args) {
     	
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("aula1-4i");
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("Aula1_4I");
         EntityManager em = emf.createEntityManager();
        
-        Pessoa a = new Pessoa("Gabriel Henz");
+        Pessoa henz = new Pessoa("Gabriel Henz");
+        Pessoa kauer = new Pessoa("Lucas Kauer");
        
         em.getTransaction().begin();
-        em.persist(a);
+	
+        em.persist(henz);
+	em.persist(kauer);
+	
         em.getTransaction().commit();
+	
         em.close();
         emf.close();
     }
