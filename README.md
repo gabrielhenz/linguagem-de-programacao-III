@@ -41,3 +41,60 @@ Feito isto:
 - Selecionar as duas bibliotecas criadas em JPA Implementation;
 - Selecionar a opção `Discover annotated classes automatically` em `Persistent class management`;
 - Clicar em `finish` e está pronto o sorvetinho.
+
+Persistence.xml
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+    <persistence-unit name="aula1-4i" transaction-type="RESOURCE_LOCAL">
+    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>   
+    <class>Pessoa</class>
+    <properties>
+        <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver"/>
+        <property name="javax.persistence.jdbc.user" value="root"/>
+        <property name="javax.persistence.jdbc.password" value="ifsul2017"/>
+        <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/4i"/>
+        <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect"/>
+        <property name="hibernate.show_sql" value="true"/>
+        <property name="hibernate.format_sql" value="true"/>
+        <property name="hibernate.use_sql_comments" value="false"/>
+        <property name="hibernate.hbm2ddl.auto" value="update"/>       
+    </properties>
+    </persistence-unit>
+
+   
+</persistence>
+``` 
+
+Classe Pessoa:
+
+```java
+import javax.persistence.*;
+
+public class Pessoa {
+
+    private Long id;
+    private String nome;
+   
+    public Long getId() {
+        return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
+    }
+    public String getNome() {
+        return nome;
+    }
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+   
+    public Pessoa() { }
+   
+    public Pessoa(String nome) {
+        super();
+        this.nome = nome;
+    }
+}
+```
