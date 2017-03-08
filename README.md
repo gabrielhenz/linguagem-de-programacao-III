@@ -73,34 +73,52 @@ import javax.persistence.*;
 
 @Entity
 public class Pessoa {
-
+	
 	@Id
-    @GeneratedValue
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
-    
+	
 	@Basic
 	private String nome;
+	
+	@Embedded
+	private Endereco endereco;
 
-    public Long getId() {
-        return id;
-    }
-    public void setId(Long id) {
-        this.id = id;
-    }
-    public String getNome() {
-        return nome;
-    }
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public Pessoa() { }
-
-    public Pessoa(String nome) {
-        super();
-        this.nome = nome;
-    }
+	public Pessoa() { }
+	
+	public Pessoa(String nome, Endereco endereco){
+		super();
+		this.nome = nome;
+		this.endereco = endereco;
+	}
+	
+	public Pessoa(Long id, String nome, Endereco endereco) {
+		super();
+		this.id = id;
+		this.nome = nome;
+		this.endereco = endereco;
+	}
+	
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+	public Endereco getEndereco() {
+		return endereco;
+	}
+	public void setEndereco(Endereco endereco) {
+		this.endereco = endereco;
+	}
 }
+
 ```
 
 
@@ -118,8 +136,10 @@ public class Executavel {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("Aula1_4I");
         EntityManager em = emf.createEntityManager();
        
-        Pessoa henz = new Pessoa("Gabriel Henz");
-        Pessoa kauer = new Pessoa("Lucas Kauer");
+        Endereco end = new Endereco("Travessa", "Germano Von Hohendorff", 109);
+        
+        Pessoa henz = new Pessoa("Gabriel Henz", end);
+        Pessoa kauer = new Pessoa("Lucas Kauer", end);
        
         em.getTransaction().begin();
 	
@@ -136,6 +156,46 @@ public class Executavel {
 ```
 
 
+## Classe Embutida Endereco
+```java
+import javax.persistence.Embeddable;
+
+@Embeddable
+public class Endereco {
+	
+	private String logradouro;
+	private String nome_logradouro;
+	private int numero;
+	
+	public Endereco() { }
+	
+	public Endereco(String logradouro, String nome_logradouro, int numero){
+		this.logradouro = logradouro;
+		this.nome_logradouro = nome_logradouro;
+		this.numero = numero;
+	}
+	
+	public String getLogradouro() {
+		return logradouro;
+	}
+	public void setLogradouro(String logradouro) {
+		this.logradouro = logradouro;
+	}
+	public String getNomeLogradouro() {
+		return nome_logradouro;
+	}
+	public void setNomeLogradouro(String nome_logradouro) {
+		this.nome_logradouro = nome_logradouro;
+	}
+	public int getNumero() {
+		return numero;
+	}
+	public void setNumero(int numero) {
+		this.numero = numero;
+	}
+}
+
+```
 ## Banco de Dados
 
 Criar o banco de dados antes de rodar a classe `Executavel`.
