@@ -11,12 +11,18 @@ public class Executavel {
 		Pessoa lucas = new Pessoa("Lucas Kauer");
 		Pessoa gabriel = new Pessoa("Gabriel Henz");
 		Endereco endereco = new Endereco("RS", "Sapucaia", 5);
+		Casa c = new Casa(lucas, "rosa");
+		
+		
+		
+		
 		lucas.setEndereco(endereco);
 		gabriel.setEndereco(endereco);
 		
 		entityManager.getTransaction().begin();
 		entityManager.persist(lucas);
 		entityManager.persist(gabriel);
+		entityManager.persist(c);
 		entityManager.getTransaction().commit();
 		
 		entityManager.close();
