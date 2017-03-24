@@ -3,12 +3,16 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
 
 @Entity
 public class Casa implements Serializable{
 	
 	@Id
+	private int id_proprietario;
+	
+	@MapsId
 	@OneToOne
 	@JoinColumn(name="PROP_ID")
 	private Pessoa proprietario;
@@ -37,6 +41,16 @@ public class Casa implements Serializable{
 
 	public void setCor(String cor) {
 		this.cor = cor;
+	}
+	
+	
+
+	public int getIdProprietario() {
+		return id_proprietario;
+	}
+
+	public void setIdProprietario(int idProprietario) {
+		this.id_proprietario = idProprietario;
 	}
 
 	@Override
