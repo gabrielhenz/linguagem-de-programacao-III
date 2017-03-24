@@ -11,7 +11,7 @@ public class Executavel {
 		Pessoa lucas = new Pessoa("Lucas Kauer");
 		Pessoa gabriel = new Pessoa("Gabriel Henz");
 		Endereco endereco = new Endereco("RS", "Sapucaia", 5);
-		Casa c = new Casa(lucas, "rosa");
+		Casa c = new Casa(lucas, gabriel, "rosa");
 		
 		
 		
