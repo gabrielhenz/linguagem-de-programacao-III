@@ -1,6 +1,8 @@
 # Aula de Linguagem de Programação III
 Repositório GIT para ajudar os colegas do IFSUL nas atividades da matéria de Linguagem de Programação III.
 
+Para acessar as classes basta ir nas pastas acima (Aula 1/4iLP3 > src)
+
 Atalhos:
 
 - [Configuração do Ambiente](#configuração-do-ambiente)
@@ -65,137 +67,6 @@ Feito isto:
         </persistence-unit>
 </persistence>
 ``` 
-
-## Classe Pessoa
-
-```java
-import javax.persistence.*;
-
-@Entity
-public class Pessoa {
-	
-	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private Long id;
-	
-	@Basic
-	private String nome;
-	
-	@Embedded
-	private Endereco endereco;
-
-	public Pessoa() { }
-	
-	public Pessoa(String nome, Endereco endereco){
-		super();
-		this.nome = nome;
-		this.endereco = endereco;
-	}
-	
-	public Pessoa(Long id, String nome, Endereco endereco) {
-		super();
-		this.id = id;
-		this.nome = nome;
-		this.endereco = endereco;
-	}
-	
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	public Endereco getEndereco() {
-		return endereco;
-	}
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
-	}
-}
-
-```
-
-
-## Classe Executavel
-
-```java
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-
-public class Executavel {
-	
-    public static void main(String[] args) {
-    	
-        EntityManagerFactory emf = Persistence.createEntityManagerFactory("Aula1_4I");
-        EntityManager em = emf.createEntityManager();
-       
-        Endereco end = new Endereco("Travessa", "Germano Von Hohendorff", 109);
-        
-        Pessoa henz = new Pessoa("Gabriel Henz", end);
-        Pessoa kauer = new Pessoa("Lucas Kauer", end);
-       
-        em.getTransaction().begin();
-	
-        em.persist(henz);
-	em.persist(kauer);
-	
-        em.getTransaction().commit();
-	
-        em.close();
-        emf.close();
-    }
-    
-}
-```
-
-
-## Classe Embutida Endereco
-```java
-import javax.persistence.Embeddable;
-
-@Embeddable
-public class Endereco {
-	
-	private String logradouro;
-	private String nome_logradouro;
-	private int numero;
-	
-	public Endereco() { }
-	
-	public Endereco(String logradouro, String nome_logradouro, int numero){
-		this.logradouro = logradouro;
-		this.nome_logradouro = nome_logradouro;
-		this.numero = numero;
-	}
-	
-	public String getLogradouro() {
-		return logradouro;
-	}
-	public void setLogradouro(String logradouro) {
-		this.logradouro = logradouro;
-	}
-	public String getNomeLogradouro() {
-		return nome_logradouro;
-	}
-	public void setNomeLogradouro(String nome_logradouro) {
-		this.nome_logradouro = nome_logradouro;
-	}
-	public int getNumero() {
-		return numero;
-	}
-	public void setNumero(int numero) {
-		this.numero = numero;
-	}
-}
-
-```
 ## Banco de Dados
 
 Criar o banco de dados antes de rodar a classe `Executavel`.
