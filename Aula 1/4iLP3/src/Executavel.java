@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -8,20 +11,19 @@ public class Executavel {
 		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Aula1_4I");
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		
-		Pessoa lucas = new Pessoa("Lucas Kauer");
-		Pessoa gabriel = new Pessoa("Gabriel Henz");
-		Endereco endereco = new Endereco("RS", "Sapucaia", 5);
-		Casa c = new Casa(lucas, gabriel, "rosa");
-		
-		
-		
-		
-		lucas.setEndereco(endereco);
-		gabriel.setEndereco(endereco);
-		
 		entityManager.getTransaction().begin();
-		entityManager.persist(lucas);
-		entityManager.persist(gabriel);
+		
+		Celular c = new Celular(new ArrayList<Chamada>(), "(51) 98765-4320");
+		
+		Chamada c1 = new Chamada(c, 30);
+		Chamada c2 = new Chamada(c, 45);
+		
+		c.getChamadas().add(c1);
+		c.getChamadas().add(c2);
+		
+		
+		entityManager.persist(c1);
+		entityManager.persist(c2);
 		entityManager.persist(c);
 		entityManager.getTransaction().commit();
 		
