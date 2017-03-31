@@ -13,18 +13,31 @@ public class Executavel {
 		
 		entityManager.getTransaction().begin();
 		
-		Celular c = new Celular(new ArrayList<Chamada>(), "(51) 98765-4320");
+		Aluno aluno = new Aluno("John");
+		Aluno aluno2 = new Aluno("Doe");
 		
-		Chamada c1 = new Chamada(c, 30);
-		Chamada c2 = new Chamada(c, 45);
+		Turma turma = new Turma("4i");
+		Turma turma2 = new Turma("4k");
 		
-		c.getChamadas().add(c1);
-		c.getChamadas().add(c2);
+		List<Aluno> alunos = new ArrayList<Aluno>();
+		List<Turma> turmas = new ArrayList<Turma>();
 		
+		alunos.add(aluno);
+		alunos.add(aluno2);
 		
-		entityManager.persist(c1);
-		entityManager.persist(c2);
-		entityManager.persist(c);
+		turmas.add(turma);
+		turmas.add(turma2);
+		
+		aluno.setTurmas(turmas);
+		aluno2.setTurmas(turmas);
+		turma.setAlunos(alunos);
+		turma2.setAlunos(alunos);
+		
+		entityManager.persist(aluno);
+		entityManager.persist(aluno2);
+		entityManager.persist(turma);
+		entityManager.persist(turma2);
+		
 		entityManager.getTransaction().commit();
 		
 		entityManager.close();

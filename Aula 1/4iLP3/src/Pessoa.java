@@ -1,47 +1,20 @@
+import java.io.Serializable;
+
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-
-import java.util.Set;
-
-import javax.persistence.CollectionTable;
-import javax.persistence.ElementCollection;
-import javax.persistence.Embedded;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
 @Entity
-public class Pessoa {
-
-	public Pessoa() {
-
-	}
-	
-	public Pessoa(String nome){
-		this.nome = nome;
-	}
-
-	public Pessoa(String nome, Endereco endereco) {
-		super();
-		this.nome = nome;
-		this.endereco = endereco;
-	}
+public class Pessoa implements Serializable{
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-
-	private String nome;
-	@Embedded
-	private Endereco endereco;
-
-	@Enumerated(EnumType.STRING)
-	private Sexo sexo;
 	
-	@ElementCollection
-	@CollectionTable(name="pessoa_tem_emails")
-	private Set<String> emails;
+	private String nome;
 
 	public int getId() {
 		return id;
@@ -59,30 +32,41 @@ public class Pessoa {
 		this.nome = nome;
 	}
 
-	public Endereco getEndereco() {
-		return endereco;
+	public Pessoa(String nome) {
+		super();
+		this.nome = nome;
 	}
 
-	public void setEndereco(Endereco endereco) {
-		this.endereco = endereco;
+	public Pessoa() {
+		super();
 	}
 
-	public Sexo getSexo() {
-		return sexo;
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + id;
+		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+		return result;
 	}
 
-	public void setSexo(Sexo sexo) {
-		this.sexo = sexo;
-	}
-
-	public Set<String> getEmails() {
-		return emails;
-	}
-
-	public void setEmails(Set<String> emails) {
-		this.emails = emails;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (!(obj instanceof Pessoa))
+			return false;
+		Pessoa other = (Pessoa) obj;
+		if (id != other.id)
+			return false;
+		if (nome == null) {
+			if (other.nome != null)
+				return false;
+		} else if (!nome.equals(other.nome))
+			return false;
+		return true;
 	}
 	
-	
-
 }
