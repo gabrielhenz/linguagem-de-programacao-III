@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -10,36 +11,37 @@ public class Executavel {
 	public static void main(String[] args) {
 		EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("Aula1_4I");
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		
+
 		entityManager.getTransaction().begin();
+
+		Aluno a1 = new Aluno("John");
+		Aluno a2 = new Aluno("Doe");
 		
-		Aluno aluno = new Aluno("John");
-		Aluno aluno2 = new Aluno("Doe");
+		Turma t1 = new Turma("4i");
+		Turma t2 = new Turma("4k");
 		
-		Turma turma = new Turma("4i");
-		Turma turma2 = new Turma("4k");
+		List<AlunoTurma> ats = new ArrayList<AlunoTurma>();
+		AlunoTurma at1 = new AlunoTurma(a1, t1, new Date());
+		AlunoTurma at2 = new AlunoTurma(a2, t2, new Date());
 		
-		List<Aluno> alunos = new ArrayList<Aluno>();
-		List<Turma> turmas = new ArrayList<Turma>();
+		ats.add(at1);
+		ats.add(at2);
 		
-		alunos.add(aluno);
-		alunos.add(aluno2);
+		a1.setTurmas(ats);
+		a2.setTurmas(ats);
+		t1.setAlunos(ats);
+		t2.setAlunos(ats);
 		
-		turmas.add(turma);
-		turmas.add(turma2);
+		entityManager.persist(a1);
+		entityManager.persist(a2);
+		entityManager.persist(t1);
+		entityManager.persist(t2);
+		entityManager.persist(at1);
+		entityManager.persist(at2);
 		
-		aluno.setTurmas(turmas);
-		aluno2.setTurmas(turmas);
-		turma.setAlunos(alunos);
-		turma2.setAlunos(alunos);
-		
-		entityManager.persist(aluno);
-		entityManager.persist(aluno2);
-		entityManager.persist(turma);
-		entityManager.persist(turma2);
-		
+
 		entityManager.getTransaction().commit();
-		
+
 		entityManager.close();
 		entityManagerFactory.close();
 	}

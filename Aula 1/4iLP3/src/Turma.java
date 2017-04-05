@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Turma {
@@ -14,8 +14,8 @@ public class Turma {
 	
 	private String nome;
 	
-	@ManyToMany(mappedBy="turmas")
-	private List<Aluno> alunos;
+	@OneToMany(mappedBy="turma")
+	private List<AlunoTurma> alunos;
 	
 	public Turma(){}
 	
@@ -40,11 +40,11 @@ public class Turma {
 		this.nome = nome;
 	}
 
-	public List<Aluno> getAlunos() {
+	public List<AlunoTurma> getAlunos() {
 		return alunos;
 	}
 
-	public void setAlunos(List<Aluno> alunos) {
+	public void setAlunos(List<AlunoTurma> alunos) {
 		this.alunos = alunos;
 	}
 	

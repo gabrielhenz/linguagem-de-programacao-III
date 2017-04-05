@@ -7,6 +7,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Aluno {
@@ -16,9 +17,8 @@ public class Aluno {
 	
 	private String nome;
 	
-	@ManyToMany
-	@JoinTable(name="aluno_turma", joinColumns = @JoinColumn(name="aluno_id"), inverseJoinColumns = @JoinColumn(name="turma_id"))
-	private List<Turma> turmas;
+	@OneToMany(mappedBy = "aluno")
+	private List<AlunoTurma> turmas;
 	
 	public Aluno(){}
 	
@@ -43,11 +43,11 @@ public class Aluno {
 		this.nome = nome;
 	}
 
-	public List<Turma> getTurmas() {
+	public List<AlunoTurma> getTurmas() {
 		return turmas;
 	}
 
-	public void setTurmas(List<Turma> turmas) {
+	public void setTurmas(List<AlunoTurma> turmas) {
 		this.turmas = turmas;
 	}
 
