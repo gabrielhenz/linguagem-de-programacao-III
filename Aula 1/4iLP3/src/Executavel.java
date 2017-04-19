@@ -13,32 +13,11 @@ public class Executavel {
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 
 		entityManager.getTransaction().begin();
-
-		Aluno a1 = new Aluno("John");
-		Aluno a2 = new Aluno("Doe");
+		PessoaFisica fisica = new PessoaFisica("John", "123.456.789-10");
+		PessoaJuridica juridica = new PessoaJuridica("IFSul", "10.729.992/0005-70");
 		
-		Turma t1 = new Turma("4i");
-		Turma t2 = new Turma("4k");
-		
-		List<AlunoTurma> ats = new ArrayList<AlunoTurma>();
-		AlunoTurma at1 = new AlunoTurma(a1, t1, new Date());
-		AlunoTurma at2 = new AlunoTurma(a2, t2, new Date());
-		
-		ats.add(at1);
-		ats.add(at2);
-		
-		a1.setTurmas(ats);
-		a2.setTurmas(ats);
-		t1.setAlunos(ats);
-		t2.setAlunos(ats);
-		
-		entityManager.persist(a1);
-		entityManager.persist(a2);
-		entityManager.persist(t1);
-		entityManager.persist(t2);
-		entityManager.persist(at1);
-		entityManager.persist(at2);
-		
+		entityManager.persist(fisica);
+		entityManager.persist(juridica);
 
 		entityManager.getTransaction().commit();
 
