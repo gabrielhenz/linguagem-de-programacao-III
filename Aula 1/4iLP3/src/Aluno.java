@@ -4,23 +4,33 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
 public class Aluno {
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	
+
 	private String nome;
 	
-	@OneToMany(mappedBy = "aluno")
+//	@ManyToMany
+//	@JoinTable(
+//			name="aluno_turma", 
+//			joinColumns=@JoinColumn(name="ALUNO_ID"),
+//			inverseJoinColumns=@JoinColumn(name="TURMA_ID")
+//	)
+//	private List<Turma> turmas;
+	
+	@OneToMany(mappedBy="aluno")
 	private List<AlunoTurma> turmas;
 	
-	public Aluno(){}
+	public Aluno(){
+		super();
+	}
 	
 	public Aluno(String nome){
 		super();
@@ -51,4 +61,11 @@ public class Aluno {
 		this.turmas = turmas;
 	}
 
+//	public List<Turma> getTurmas() {
+//		return turmas;
+//	}
+//
+//	public void setTurmas(List<Turma> turmas) {
+//		this.turmas = turmas;
+//	}
 }
