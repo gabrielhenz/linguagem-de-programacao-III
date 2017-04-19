@@ -11,29 +11,27 @@ import javax.persistence.TemporalType;
 @Entity
 @IdClass(AlunoTurmaId.class)
 public class AlunoTurma {
-	
 	@Id
 	@ManyToOne
-	@JoinColumn(name="ALUNO_ID")
+	@JoinColumn(name="aluno_id")
 	private Aluno aluno;
 	
 	@Id
 	@ManyToOne
-	@JoinColumn(name="TURMA_ID")
+	@JoinColumn(name="turma_id")
 	private Turma turma;
 	
 	@Temporal(TemporalType.DATE)
-	private Date data;
-	
-	public AlunoTurma(){}
+	private Date date;
 
-	public AlunoTurma(Aluno aluno, Turma turma, Date data) {
-		super();
+	public AlunoTurma() { }
+		
+	public AlunoTurma(Aluno aluno, Turma turma, Date date){
 		this.aluno = aluno;
 		this.turma = turma;
-		this.data = data;
+		this.date = date;
 	}
-
+	
 	public Aluno getAluno() {
 		return aluno;
 	}
@@ -50,12 +48,11 @@ public class AlunoTurma {
 		this.turma = turma;
 	}
 
-	public Date getData() {
-		return data;
+	public Date getDate() {
+		return date;
 	}
 
-	public void setData(Date data) {
-		this.data = data;
+	public void setDate(Date date) {
+		this.date = date;
 	}
-
 }
