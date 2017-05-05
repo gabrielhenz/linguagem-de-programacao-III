@@ -9,7 +9,3 @@
 # Build Config
 /bin
 /build
-
-# Eclipse Environment
-.classpath
-.project
