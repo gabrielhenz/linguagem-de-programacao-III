@@ -5,3 +5,11 @@
 *.jar
 *.war
 *.ear
+
+# Build Config
+/bin
+/build
+
+# Eclipse Environment
+.classpath
+.project
